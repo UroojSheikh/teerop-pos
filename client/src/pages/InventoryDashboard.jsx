@@ -30,7 +30,7 @@ const InventoryDashboard = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/products');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products`);
       setProducts(res.data.products);
     } catch (err) {
       console.error(err);
@@ -47,7 +47,7 @@ const InventoryDashboard = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/products/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products/${id}`);
         fetchProducts();
       } catch (err) {
         alert('Failed to delete product');
@@ -73,7 +73,7 @@ const InventoryDashboard = () => {
         payload.safetyNote = catData.safetyNote;
       }
 
-      await axios.post('http://localhost:5000/api/products', payload);
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products`, payload);
       setShowAddModal(false);
       setFormData({ sku: '', name: '', price: '', quantityInStock: '', category: 'General', description: '' });
       fetchProducts();

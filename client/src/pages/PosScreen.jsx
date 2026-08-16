@@ -24,7 +24,7 @@ const PosScreen = () => {
     setError('');
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/products?search=${skuInput}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products?search=${skuInput}`);
       const products = res.data.products;
       
       if (products.length === 0) {
@@ -95,7 +95,7 @@ const PosScreen = () => {
     setError('');
     try {
       const items = cart.map(item => ({ productId: item.id, quantity: item.quantity }));
-      const res = await axios.post('http://localhost:5000/api/pos/checkout', { items });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/pos/checkout`, { items });
       if (res.data.success) {
         alert('Checkout successful! Transaction ID: ' + res.data.transactionId);
         setCart([]);

@@ -19,8 +19,8 @@ const AdminDashboard = () => {
     try {
       setLoading(true);
       const [statsRes, usersRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/stats'),
-        axios.get('http://localhost:5000/api/users')
+        axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/stats`),
+        axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/users`)
       ]);
       setStats(statsRes.data.stats);
       setUsers(usersRes.data.users);
@@ -38,7 +38,7 @@ const AdminDashboard = () => {
 
   const updateRole = async (id, newRole) => {
     try {
-      await axios.put(`http://localhost:5000/api/users/${id}/role`, { role: newRole });
+      await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/users/${id}/role`, { role: newRole });
       fetchData(); // Refresh list
     } catch (err) {
       alert('Failed to update role');
