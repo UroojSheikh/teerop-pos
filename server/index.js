@@ -37,13 +37,17 @@ app.use(errorHandler);
 // Sync Database and Start Server
 const PORT = process.env.PORT || 5000;
 
-sequelize.sync({ alter: true }) // Using alter to update schema automatically during development
+sequelize.sync({ alter: true }) // Build tables automatically on cold start
   .then(() => {
     console.log('Database synced successfully');
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
+    if (process.env.NODE_ENV !== 'production') {
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    }
   })
   .catch((err) => {
     console.error('Failed to sync database:', err);
   });
+
+module.exports = app;
