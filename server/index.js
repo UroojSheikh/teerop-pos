@@ -25,6 +25,16 @@ app.use('/api/pos', posRoutes);
 app.use('/api/stats', statsRoutes);
 app.use('/api/users', userRoutes);
 
+// Sync Database Route (needed for Serverless environments like Vercel)
+app.get('/api/sync', async (req, res) => {
+  try {
+    await sequelize.sync({ alter: true });
+    res.json({ success: true, message: 'Database tables created successfully!' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // Basic Route
 app.get('/', (req, res) => {
   res.send('Teerop POS API is running');
