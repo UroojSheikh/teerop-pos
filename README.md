@@ -1,49 +1,67 @@
 # Teerop POS & Inventory Management System
 
-This is the final capstone project for the Teerop Web Development Internship. It is a full-stack web application featuring role-based access, multi-category inventory management, and a functional POS terminal.
+This is the final capstone project for the Teerop Web Development Internship. It is a full-stack Point-of-Sale (POS) and Inventory Management System built with React, Node.js, Express, and PostgreSQL.
 
-## Features Built
-- **Admin Dashboard**: Store-wide analytics and User Management with role assignment.
-- **Inventory Dashboard**: Full CRUD for products with category-specific fields (Fragile, Cold, Tech, Cleaning) and low-stock alerts.
-- **POS Cashier Terminal**: Real-time product search, cart logic, total calculation, and checkout transaction logging.
-- **Auth**: Secure JWT and bcrypt authentication with strict role-based route protection.
-- **Modern UI**: Fully responsive, glassmorphic UI built with Tailwind CSS v4 and Google Fonts.
+## Live Deployment Links
+- **Frontend (Vercel)**: https://teerop-pos.vercel.app
+- **Backend (Vercel Serverless)**: https://teerop-pos-u37l.vercel.app
+
+## Test Login Credentials
+You can use the following credentials to test the role-based access control. (Note: You may need to register these on the live site first if they don't exist yet).
+
+**1. Admin**
+- Username: `admin_test`
+- Password: `password123`
+- Role: Admin
+
+**2. Inventory Manager**
+- Username: `manager_test`
+- Password: `password123`
+- Role: Inventory Manager
+
+**3. Cashier**
+- Username: `cashier_test`
+- Password: `password123`
+- Role: Cashier
+
+## Environment Variables Needed
+To run this project locally, create a `.env` file in the `server` directory with the following variables:
+```
+PORT=5000
+DATABASE_URL=your_neon_postgres_connection_string
+JWT_SECRET=your_jwt_secret_key
+```
+
+In the `client` directory, you can set the backend API URL (if running in production):
+```
+VITE_API_URL=https://teerop-pos-u37l.vercel.app
+```
+
+## Setup Instructions (Local Development)
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/UroojSheikh/teerop-pos.git
+   cd teerop-pos
+   ```
+
+2. Install backend dependencies and start the server:
+   ```bash
+   cd server
+   npm install
+   npm start
+   ```
+
+3. Install frontend dependencies and start the React app:
+   ```bash
+   cd ../client
+   npm install
+   npm run dev
+   ```
 
 ## Tech Stack
-- **Frontend**: React, Tailwind CSS, Vite, React Router, Axios, Lucide React
-- **Backend**: Node.js, Express, Sequelize, PostgreSQL, JWT, bcrypt
-
-## Setup Instructions
-
-### Prerequisites
-- Node.js installed
-- PostgreSQL installed and running
-
-### 1. Database Setup
-Create a PostgreSQL database named `teerop_pos`.
-
-### 2. Backend Setup
-1. Open terminal in the `server` directory.
-2. Run `npm install`
-3. Check the `.env` file and ensure the `DATABASE_URL` matches your local postgres credentials (e.g. `postgres://postgres:yourpassword@localhost:5432/teerop_pos`).
-4. Run `npm run dev` to start the server. The database tables will be automatically created on the first run.
-
-### 3. Frontend Setup
-1. Open terminal in the `client` directory.
-2. Run `npm install`
-3. Run `npm run dev` to start the React application.
-4. Access the app at `http://localhost:5173`.
-
-## Test Accounts
-You can register new accounts directly from the UI by clicking the "Register Here" link on the login page.
-Suggested roles to create:
-1. `admin` (Role: Admin) - Full access.
-2. `manager` (Role: Inventory Manager) - Access to inventory CRUD.
-3. `cashier` (Role: Cashier) - Access to POS checkout.
-
-## Submitting Requirements
-As per the capstone guidelines, remember to:
-- Push this repository to GitHub.
-- Deploy the frontend to Vercel and the backend to Render.
-- Record a short demo video walking through the Admin, Inventory Manager, and Cashier views, including a checkout transaction.
-- Export the chat log with Antigravity to submit as your prompt log.
+- **Frontend**: React + Tailwind CSS
+- **Backend**: Node.js + Express
+- **Database**: PostgreSQL (Neon) + Sequelize ORM
+- **Authentication**: JWT + bcryptjs
+- **File Upload**: Multer (configured for /tmp on Vercel)

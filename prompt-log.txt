@@ -1,0 +1,31 @@
+# AI Agent Prompt Log - Teerop Capstone Project
+Agent Used: Antigravity
+
+## Phase 1: Planning & Setup
+- "Please help me set up a full-stack POS and Inventory Management System with React, Node.js, Express, and PostgreSQL."
+- "Design the database schema for Users, Products, Categories, Transactions, and TransactionItems."
+- Reviewed and corrected the Sequelize models to ensure the 'role' enum and product 'quantity' rules were strictly enforced.
+
+## Phase 2 & 3: Backend Core & Authentication
+- "Build the Express server with JWT authentication and bcrypt password hashing."
+- "Create role-based middleware to protect Admin, Inventory Manager, and Cashier routes."
+- Directed the agent to fix a bug with `bcrypt` crashing on serverless deployment by replacing it with `bcryptjs`.
+
+## Phase 4: Inventory Module
+- "Build the full CRUD API for products with category-specific fields (Fragile, Cold, Tech, Cleaning, General)."
+- "Implement image uploads using Multer."
+- Reviewed output and forced the agent to change Multer to use the `/tmp` directory to fix the Vercel Read-Only file system crash.
+
+## Phase 5 & 6: Billing / POS & Frontend
+- "Build the React frontend with Tailwind CSS, including a role-based dashboard layout."
+- "Create the Cashier POS screen with scan-style SKU lookup and cart logic."
+- "Ensure the checkout process deducts stock from the database and logs a Transaction."
+- Requested style changes: "Change the background color and font colors and make the overall theme solid."
+
+## Phase 7: Polish & Deploy
+- "Help me deploy the frontend to Vercel and the backend to Vercel Serverless (using Neon Postgres instead of Render to avoid credit card blocks)."
+- Worked iteratively with the agent to debug Vercel deployment issues:
+  1. Fixed the `pg` dynamic import bug in Sequelize for Vercel's bundler.
+  2. Fixed the Multer read-only file system crash.
+  3. Created an `/api/sync` route to successfully build tables in the cloud database.
+  4. Added `vercel.json` to fix React Router 404 errors on refresh.
